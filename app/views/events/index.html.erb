@@ -1,0 +1,13 @@
+<h1 class="text-3xl font-bold">Events</h1>
+
+<%= link_to "New Event", new_event_path, class: "px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm" %>
+
+<div class="grid grid-cols-3 gap-4">
+  <% @events.each do |event| %>
+    <div class="p-4 bg-white shadow rounded-lg">
+      <h2 class="text-xl font-bold"><%= event.title %></h2>
+      <p><%= event.description %></p>
+      <p><%= event.date %></p>
+    </div>
+  <% end %>
+</div>

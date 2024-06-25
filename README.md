@@ -1,24 +1,100 @@
-# README
+Sure! Here is the documentation in Markdown format detailing the issue, the resolution steps, and how to test the setup:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Fixing Tailwind CSS and DaisyUI Integration in Rails 7.1 without CDN
 
-Things you may want to cover:
+## Issue
+The issue was integrating DaisyUI with Tailwind CSS in a Rails 7.1 application without using a CDN. The initial setup didn't work correctly due to missing configurations and dependencies.
 
-* Ruby version
+## Resolution Steps
 
-* System dependencies
+### 1. Install Bundling Gems
+Ensure the necessary bundling gems are installed:
+```bash
+bundle add jsbundling-rails cssbundling-rails
+```
 
-* Configuration
+### 2. Set Up Tailwind and DaisyUI
+Run the setup commands for Tailwind:
+```bash
+rails css:install:tailwind
+yarn add daisyui @tailwindcss/forms @tailwindcss/typography @tailwindcss/container-queries
+```
 
-* Database creation
+### 3. Update Tailwind Configuration
+Ensure your `tailwind.config.js` includes the required plugins:
+```js
+const defaultTheme = require('tailwindcss/defaultTheme')
 
-* Database initialization
+module.exports = {
+  content: [
+    './public/*.html',
+    './app/helpers/**/*.rb',
+    './app/javascript/**/*.js',
+    './app/views/**/*.{erb,haml,html,slim}'
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/container-queries'),
+    require('daisyui'),
+  ]
+}
+```
 
-* How to run the test suite
+### 4. Ensure PostCSS Configuration
+Make sure your `postcss.config.js` includes the required plugins:
+```js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### 5. Verify Application CSS
+Verify your `application.tailwind.css` contains the Tailwind directives:
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
-* Deployment instructions
+### 6. Create `Procfile.dev`
+Create a `Procfile.dev` to run both Rails and the CSS build process:
+```procfile
+web: bin/rails server
+css: yarn build:css --watch
+```
 
-* ...
+### 7. Start Development
+Run your development server with Foreman to watch for CSS changes:
+```bash
+bin/dev
+```
+
+## Testing the Setup
+
+### Adding a DaisyUI Component
+To test if DaisyUI is working, add a simple DaisyUI component to one of your views:
+```erb
+<div class="btn btn-primary">
+  Test Button
+</div>
+```
+Visit the view in your browser and ensure the button is styled correctly.
+
+### Check Browser Console
+Open the browser's developer console to check for any CSS or JavaScript errors.
+
+### View Source
+Verify that the compiled CSS includes styles from both Tailwind CSS and DaisyUI by viewing the source of the generated `application.css`.
+
+This setup should resolve the integration issues and allow you to use Tailwind CSS and DaisyUI correctly in your Rails application.
