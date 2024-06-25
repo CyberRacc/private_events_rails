@@ -1,9 +1,44 @@
 # Running the app
 
-Execute from the project root directory:
+To set up the app on a new computer for development, follow these steps:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/cyberracc/private_events_rails.git
+```
+
+2. Install the required gems:
+```bash
+bundle install
+```
+
+3. Install Yarn:
+```bash
+npm install --global yarn
+```
+
+4. Install the required Node.js LTS version:
+```bash
+nvm install --lts
+```
+
+5. Set the installed Node.js LTS version as the default:
+```bash
+nvm use --lts
+```
+
+6. Install the project dependencies:
+```bash
+yarn install
+```
+
+7. Start the development server and the CSS build process:
 ```bash
 bin/dev
 ```
+
+Make sure to execute these commands from the project root directory.
+
 
 # Fixing Tailwind CSS and DaisyUI Integration in Rails 7.1 without CDN
 
