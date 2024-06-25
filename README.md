@@ -47,6 +47,8 @@ The issue was integrating DaisyUI with Tailwind CSS in a Rails 7.1 application w
 
 ## Resolution Steps
 
+> Note that you must also verify that the `tailwind.config.js` file is in `app/config` **only**! If it is in `app/config` *and* in the root `app` folder, DaisyUI will not function correctly.
+
 ### 1. Install Bundling Gems
 Ensure the necessary bundling gems are installed:
 ```bash
