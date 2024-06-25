@@ -1,5 +1,3 @@
-Sure! Here is the documentation in Markdown format detailing the issue, the resolution steps, and how to test the setup:
-
 # Fixing Tailwind CSS and DaisyUI Integration in Rails 7.1 without CDN
 
 ## Issue
