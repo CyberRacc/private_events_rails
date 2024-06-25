@@ -13,11 +13,17 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/container-queries'),
     require('daisyui'),
-  ]
+  ],
+  daisyui: {
+    themes: ["light", "dark"], // Enable the default light and dark themes
+  },
 }
