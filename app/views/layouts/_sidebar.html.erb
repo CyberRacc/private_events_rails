@@ -1,0 +1,16 @@
+<aside class="bg-base-200 w-full h-full p-4 shadow-lg flex flex-col justify-between">
+  <nav class="space-y-2">
+    <%= link_to "Events", root_path, class: "block py-2 px-4 rounded hover:bg-base-300" %>
+    <% if user_signed_in? %>
+      <%= link_to "Profile", user_path(current_user), class: "block py-2 px-4 rounded hover:bg-base-300" %>
+    <% end %>
+  </nav>
+  <nav class="mt-auto space-y-2">
+    <% if user_signed_in? %>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, "data-turbo-method": "delete", class: "block py-2 px-4 rounded hover:bg-base-300" %>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path, class: "block py-2 px-4 rounded hover:bg-base-300" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "block py-2 px-4 rounded hover:bg-base-300" %>
+    <% end %>
+  </nav>
+</aside>
