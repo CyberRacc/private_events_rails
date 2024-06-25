@@ -1,3 +1,10 @@
+# Running the app
+
+Execute from the project root directory:
+```bash
+bin/dev
+```
+
 # Fixing Tailwind CSS and DaisyUI Integration in Rails 7.1 without CDN
 
 ## Issue

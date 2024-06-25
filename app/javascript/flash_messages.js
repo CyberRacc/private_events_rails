@@ -1,5 +1,5 @@
 // app/javascript/flash_messages.js
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
     const flashMessages = document.querySelectorAll('#flash-message');
     flashMessages.forEach(flashMessage => {
       flashMessage.classList.add('fade-in');

@@ -1,0 +1,32 @@
+<h1 class="text-3xl font-bold mb-6">Event Details</h1>
+
+<%= link_to "Back to all events", events_path, class: "btn btn-primary mb-6" %>
+
+<section class="p-6 rounded-lg shadow-md">
+  <h2 class="text-3xl font-bold mb-6"><%= @event.title %></h2>
+  
+  <div class="mb-4">
+    <h3 class="text-xl font-semibold">Description</h3>
+    <p class="mt-2"><%= @event.description %></p>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="text-xl font-semibold">Date & Time</h3>
+    <p class="mt-2"><%= @event.start_time.strftime("%A, %d %B %Y, %I:%M %p") %></p>
+  </div>
+
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold">Location</h3>
+    <p class="mt-2"><%= @event.location %></p>
+  </div>
+
+    <div class="mb-6">
+    <h3 class="text-xl font-semibold">Created By</h3>
+    <p class="mt-2"><%= @event.user.username %></p>
+  </div>
+
+  <div class="flex space-x-4">
+    <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-accent" %>
+    <%= link_to "Delete Event", event_path(@event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-error" %>
+  </div>
+</section>
