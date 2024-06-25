@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>PrivateEventsRails</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+<html data-theme="<%= cookies[:theme] || 'light' %>">
+<head>
+  <title>PrivateEventsRails</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body class="flex flex-col min-h-screen bg-base-100">
+  <%= render 'layouts/header' %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <!-- Flash Messages -->
+  <div id="flash-messages" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-lg">
+    <%= render 'layouts/flash_messages' %>
+  </div>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <!-- Main container for sidebar + content, now horizontal -->
+  <div class="flex flex-1 container mx-auto mt-4">
+    <!-- Sidebar -->
+    <div class="w-64">
+      <%= render 'layouts/sidebar' %>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 bg-base-100 rounded-lg shadow-md">
       <%= yield %>
     </main>
-  </body>
+  </div>
+
+  <%= render 'layouts/footer' %>
+</body>
 </html>

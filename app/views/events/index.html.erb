@@ -1,13 +1,20 @@
-<h1 class="text-3xl font-bold">Events</h1>
+<h1 class="text-3xl font-bold mb-6">Events</h1>
 
-<%= link_to "New Event", new_event_path, class: "px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm" %>
+<%= link_to "New Event", new_event_path, class: "btn btn-primary mb-6" %>
 
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <% @events.each do |event| %>
-    <div class="p-4 bg-white shadow rounded-lg">
-      <h2 class="text-xl font-bold"><%= event.title %></h2>
-      <p><%= event.description %></p>
-      <p><%= event.date %></p>
+    <div class="card shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-xl font-bold"><%= event.title %></h2>
+        <p class="text-gray-700"><%= event.description %></p>
+        <p class="text-gray-500"><%= event.start_time %></p>
+        <div class="card-actions justify-end">
+          <%= link_to "View", event_path(event), class: "btn btn-secondary" %>
+          <%= link_to "Edit", edit_event_path(event), class: "btn btn-accent" %>
+          <%= link_to "Delete", event_path(event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-error" %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

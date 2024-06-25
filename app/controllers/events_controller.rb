@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @events = Event.all
   end
@@ -8,18 +10,19 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = current_user.created_events.new(event_params) # This line associates the event with the current_user
 
     if @event.save
-      redirect_to events_path
+      redirect_to events_path, notice: "Event created successfully!"
     else
-      render :new
+      Rails.logger.debug @event.errors.full_messages.join(", ")
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :location, :description)
+    params.require(:event).permit(:title, :start_time, :end_time, :location, :description)
   end
 end

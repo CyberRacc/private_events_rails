@@ -1,29 +1,54 @@
 <%= form_with(model: @event, local: true, class: "space-y-4") do |form| %>
+  <% if @event.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-control">
+    <%= form.label :title, "Event title", class: "label" %>
+    <%= form.text_field :title, class: "input input-bordered #{'input-error' if @event.errors[:title].any?}", placeholder: "Absolutely Insane Event" %>
+    <% @event.errors[:title].each do |error| %>
+      <p class="text-error text-xs mt-1"><%= error %></p>
+    <% end %>
+  </div>
+
+  <div class="form-control">
+    <%= form.label :description, class: "label" %>
+    <%= form.text_area :description, class: "textarea textarea-bordered #{'textarea-error' if @event.errors[:description].any?}", placeholder: "This even will blow your socks off! Please be nice to others when attending." %>
+    <% @event.errors[:description].each do |error| %>
+      <p class="text-error text-xs mt-1"><%= error %></p>
+    <% end %>
+  </div>
+
+  <div class="flex space-x-4">
     <div class="form-control">
-        <%= form.label :title, class: "label" %>
-        <%= form.text_field :title, class: "input" %>
+      <%= form.label :start_time, "Event starts", class: "label" %>
+      <%= form.datetime_field :start_time, class: "input input-bordered input-lg #{'input-error' if @event.errors[:start_time].any?}" %>
+      <% @event.errors[:start_time].each do |error| %>
+        <p class="text-error text-xs mt-1"><%= error %></p>
+      <% end %>
     </div>
-
     <div class="form-control">
-        <%= form.label :description, class: "label" %>
-        <%= form.text_area :description, class: "textarea" %>
+      <%= form.label :end_time, "Event ends", class: "label" %>
+      <%= form.datetime_field :end_time, class: "input input-bordered input-lg #{'input-error' if @event.errors[:end_time].any?}" %>
+      <% @event.errors[:end_time].each do |error| %>
+        <p class="text-error text-xs mt-1"><%= error %></p>
+      <% end %>
     </div>
+  </div>
 
-    <div class="flex space-x-4">
-        <div class="form-control">
-            <%= form.label :start_time, class: "label" %>
-            <%= form.datetime_field :start_time, class: "input input-lg" %>
-        </div>
-        <div class="form-control">
-            <%= form.label :end_time, class: "label" %>
-            <%= form.datetime_field :end_time, class: "input" %>
-        </div>
-    </div>
+  <div class="form-control">
+    <%= form.label :location, class: "label" %>
+    <%= form.text_field :location, class: "input input-bordered #{'input-error' if @event.errors[:location].any?}", placeholder: "The Moon" %>
+    <% @event.errors[:location].each do |error| %>
+      <p class="text-error text-xs mt-1"><%= error %></p>
+    <% end %>
+  </div>
 
-    <div class="form-control">
-        <%= form.label :location, class: "label" %>
-        <%= form.text_field :location, class: "input" %>
-    </div>
-
-    <%= form.submit "Save", class: "btn btn-primary" %>
+  <%= form.submit "Save", class: "btn btn-primary mb-6" %>
 <% end %>
