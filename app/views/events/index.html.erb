@@ -5,7 +5,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <% @events.each do |event| %>
     <%= link_to event_path(event), class: "block card shadow-md hover:shadow-lg hover:bg-base-200 active:bg-base-300" do %>
-      <div class="card-body block card shadow-md hover:shadow-lg hover:bg-base-200 active:bg-base-300">
+      <div class="card-body">
         <h2 class="card-title text-xl font-bold"><%= event.title %></h2>
         <p class="text-base-content"><%= event.description %></p>
         <br>
