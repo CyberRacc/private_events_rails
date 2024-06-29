@@ -1,36 +1,32 @@
-document.addEventListener("turbo:load", function () {
-  const themeToggleBtn = document.getElementById("theme-toggle");
-  const sunIcon = document.getElementById("sun-icon");
-  const moonIcon = document.getElementById("moon-icon");
+document.addEventListener('turbo:load', () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = themeToggle.nextElementSibling;
+  const moonIcon = sunIcon.nextElementSibling;
+  const currentTheme = localStorage.getItem('theme') || 'light';
 
-  // Load theme from local storage
-  const currentTheme = localStorage.getItem("theme") || "light";
-  document.documentElement.setAttribute("data-theme", currentTheme);
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  themeToggle.checked = currentTheme === 'dark';
 
-  // Update the toggle and icons
-  if (currentTheme === "dark") {
-    themeToggleBtn.checked = true;
-    sunIcon.classList.remove("hidden");
-    moonIcon.classList.add("hidden");
-  } else {
-    themeToggleBtn.checked = false;
-    sunIcon.classList.add("hidden");
-    moonIcon.classList.remove("hidden");
-  }
-
-  // Toggle theme on switch change
-  themeToggleBtn.addEventListener("change", () => {
-    let theme = document.documentElement.getAttribute("data-theme");
-    if (theme === "dark") {
-      theme = "light";
-      sunIcon.classList.add("hidden");
-      moonIcon.classList.remove("hidden");
+  const updateIcons = () => {
+    if (themeToggle.checked) {
+      sunIcon.classList.add('opacity-0');
+      sunIcon.classList.remove('opacity-100');
+      moonIcon.classList.add('opacity-100');
+      moonIcon.classList.remove('opacity-0');
     } else {
-      theme = "dark";
-      sunIcon.classList.remove("hidden");
-      moonIcon.classList.add("hidden");
+      sunIcon.classList.add('opacity-100');
+      sunIcon.classList.remove('opacity-0');
+      moonIcon.classList.add('opacity-0');
+      moonIcon.classList.remove('opacity-100');
     }
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+  };
+
+  updateIcons();
+
+  themeToggle.addEventListener('change', () => {
+    const newTheme = themeToggle.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateIcons();
   });
 });

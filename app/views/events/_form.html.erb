@@ -28,14 +28,14 @@
   <div class="flex space-x-4">
     <div class="form-control">
       <%= form.label :start_time, "Event starts", class: "label" %>
-      <%= form.datetime_field :start_time, class: "input input-bordered input-lg #{'input-error' if @event.errors[:start_time].any?}" %>
+      <%= form.datetime_field :start_time, class: "input input-bordered input-lg #{'input-error' if @event.errors[:start_time].any?}", min: (Time.now + 1.week).strftime("%Y-%m-%dT%H:%M"), max: (Time.now + 5.years).strftime("%Y-%m-%dT%H:%M") %>
       <% @event.errors[:start_time].each do |error| %>
         <p class="text-error text-xs mt-1"><%= error %></p>
       <% end %>
     </div>
     <div class="form-control">
       <%= form.label :end_time, "Event ends", class: "label" %>
-      <%= form.datetime_field :end_time, class: "input input-bordered input-lg #{'input-error' if @event.errors[:end_time].any?}" %>
+      <%= form.datetime_field :end_time, class: "input input-bordered input-lg #{'input-error' if @event.errors[:end_time].any?}", min: (Time.now + 1.week).strftime("%Y-%m-%dT%H:%M"), max: (Time.now + 5.years).strftime("%Y-%m-%dT%H:%M") %>
       <% @event.errors[:end_time].each do |error| %>
         <p class="text-error text-xs mt-1"><%= error %></p>
       <% end %>

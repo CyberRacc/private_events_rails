@@ -1,3 +1,16 @@
+# Private Events
+
+This is a private events application built with Ruby on Rails. Users can create events, attend events, and see a list of past and upcoming events.
+
+## Features
+- User authentication with Devise
+- Event creation and management
+- Event attendance tracking
+- Filtering events by past and upcoming
+
+[Link to Odin Project Assignment](https://www.theodinproject.com/lessons/ruby-on-rails-private-events)
+
+
 # Running the app
 
 To set up the app on a new computer for development, follow these steps:
@@ -32,7 +45,12 @@ nvm use --lts
 yarn install
 ```
 
-7. Start the development server and the CSS build process:
+7. Seed the database:
+```bash
+rails db:seed
+```
+
+8. Start the development server and the CSS build process:
 ```bash
 bin/dev
 ```
