@@ -45,12 +45,17 @@ nvm use --lts
 yarn install
 ```
 
-7. Seed the database:
+7. Migrate the database:
+```bash
+rails db:migrate
+```
+
+8. Seed the database:
 ```bash
 rails db:seed
 ```
 
-8. Start the development server and the CSS build process:
+9. Start the development server and the CSS build process:
 ```bash
 bin/dev
 ```
