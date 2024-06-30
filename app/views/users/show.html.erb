@@ -15,7 +15,7 @@
 
 <h2 class="text-2xl font-bold mt-4">Upcoming Events Attending</h2>
 <ul>
-  <% @user.attended_events.where('start_time > ?', Time.now).each do |event| %>
+  <% @user.attended_events.upcoming.each do |event| %>
     <li>
       <%= link_to event.title, event_path(event), class: "text-blue-500 hover:underline" %>
     </li>
@@ -24,7 +24,7 @@
 
 <h2 class="text-2xl font-bold mt-4">Past Events Attended</h2>
 <ul>
-  <% @user.attended_events.where('end_time <= ?', Time.now).each do |event| %>
+  <% @user.attended_events.past.each do |event| %>
     <li>
       <%= link_to event.title, event_path(event), class: "text-blue-500 hover:underline" %>
     </li>

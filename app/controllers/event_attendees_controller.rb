@@ -19,6 +19,11 @@ class EventAttendeesController < ApplicationController
     event = Event.find(params[:event_id])
     event_attendee = EventAttendee.find_by(event: event, user: current_user)
 
+    # Don't allow users to unattend past events
+    if event.end_time < Time.now
+      return redirect_to event, alert: 'You cannot unattend a past event'
+    end
+
     if event_attendee
       event_attendee.destroy
       redirect_to event, notice: 'You are no longer attending this event'

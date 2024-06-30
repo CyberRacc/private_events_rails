@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :event_attendees, dependent: :destroy
   has_many :attended_events, through: :event_attendees, source: :event
 
+  has_many :invitations, dependent: :destroy
+  has_many :invited_events, through: :invitations, source: :event
+
   # Validations
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true

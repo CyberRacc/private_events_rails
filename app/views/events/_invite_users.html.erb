@@ -1,0 +1,8 @@
+<h2>Invite Users</h2>
+<%= form_with url: invite_event_path(@event), local: true do |form| %>
+  <div class="form-control">
+    <%= form.label :user_id, "Select User", class: "label" %>
+    <%= form.collection_select :user_id, User.all, :id, :username, {}, { class: "input input-bordered" } %>
+  </div>
+  <%= form.submit "Invite", class: "btn btn-primary" %>
+<% end %>

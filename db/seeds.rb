@@ -35,7 +35,7 @@ event_names = [
   "Future Tech Expo", "Music Fest 2025", "Animation Conference",
   "Cyber Security Summit", "Ruby on Rails Workshop", "AI & ML Meetup",
   "Blockchain Symposium", "Creative Coding Hackathon", "Digital Art Exhibition",
-  "VR & AR Expo"
+  "VR & AR Expo", "EDM Music Festival", "Collaborative Art Workshop"
 ]
 event_descriptions = [
   "An expo showcasing the latest advancements in technology.",
@@ -47,17 +47,21 @@ event_descriptions = [
   "A symposium discussing the future of blockchain technology.",
   "A hackathon for creative coders to build innovative projects.",
   "An exhibition of digital art from various artists.",
-  "An expo exploring the latest in virtual and augmented reality."
+  "An expo exploring the latest in virtual and augmented reality.",
+  "A music festival featuring the best electronic dance music artists.",
+  "A workshop for artists to collaborate on new projects."
 ]
+
 event_dates = [
   Time.new(2025, 6, 1, 9, 0), Time.new(2025, 7, 15, 12, 0),
   Time.new(2025, 8, 20, 10, 0), Time.new(2025, 9, 5, 14, 0),
   Time.new(2025, 10, 10, 11, 0), Time.new(2025, 11, 25, 16, 0),
   Time.new(2025, 12, 30, 13, 0), Time.new(2026, 1, 15, 9, 0),
-  Time.new(2026, 2, 28, 10, 0), Time.new(2026, 3, 20, 14, 0)
+  Time.new(2026, 2, 28, 10, 0), Time.new(2026, 3, 20, 14, 0),
+  Time.new(2023, 4, 5, 11, 0), Time.new(2023, 5, 10, 16, 0)
 ]
 
-10.times do |i|
+12.times do |i|
   events << Event.create!(
     title: event_names[i],
     description: event_descriptions[i],

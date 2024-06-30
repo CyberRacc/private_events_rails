@@ -1,0 +1,25 @@
+<h1 class="text-3xl font-bold mb-6"><%= @user.username %>'s Invitations</h1>
+
+<% if @user.invitations.pending.any? %>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <% @user.invitations.pending.each do |invitation| %>
+      <% event = invitation.event %>
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-blue-500">
+            <%= link_to event.title, event_path(event) %>
+          </h2>
+          <p><%= event.description.truncate(100) %></p>
+          <p><b>Starts:</b> <%= event.start_time.strftime("%A, %d %B %Y, %I:%M %p") %></p>
+          <p><b>Ends:</b> <%= event.end_time.strftime("%A, %d %B %Y, %I:%M %p") %></p>
+          <div class="card-actions justify-end">
+            <%= button_to 'Accept', accept_invitation_user_path(current_user, invitation_id: invitation.id), method: :post, class: "btn btn-success" %>
+            <%= button_to 'Reject', reject_invitation_user_path(current_user, invitation_id: invitation.id), method: :post, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>You have no invitations at this time.</p>
+<% end %>

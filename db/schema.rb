@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_100051) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_30_103102) do
   create_table "event_attendees", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "user_id", null: false
@@ -30,7 +30,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_100051) do
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "private", default: false
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "pending"
+    t.index ["event_id"], name: "index_invitations_on_event_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -83,6 +94,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_100051) do
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
   add_foreign_key "events", "users"
+  add_foreign_key "invitations", "events"
+  add_foreign_key "invitations", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "tickets"
   add_foreign_key "orders", "events"

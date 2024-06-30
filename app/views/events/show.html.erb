@@ -35,23 +35,40 @@
     </ul>
   </div>
 
-  <div class="flex space-x-4">
-    <% if user_signed_in? %>
-      <% if @event.attendees.include?(current_user) %>
-        <%= button_to 'I am no longer attending', event_event_attendee_path(@event, @event.event_attendees.find_by(user_id: current_user.id)), method: :delete, class: "btn btn-warning" %>
+  <% unless @event.private %>
+    <div class="flex space-x-4">
+      <% if user_signed_in? %>
+        <% if @event.attendees.include?(current_user) %>
+          <%= button_to 'I am no longer attending', event_event_attendee_path(@event, @event.event_attendees.find_by(user_id: current_user.id)), method: :delete, class: "btn btn-warning" %>
+        <% else %>
+          <%= button_to 'I am attending', event_event_attendees_path(@event), method: :post, class: "btn btn-success" %>
+        <% end %>
       <% else %>
-        <%= button_to 'I am attending', event_event_attendees_path(@event), method: :post, class: "btn btn-success" %>
+        <%= link_to 'Sign in to register', new_user_session_path, class: "btn btn-primary" %>
       <% end %>
-    <% else %>
-      <%= link_to 'Sign in to register', new_user_session_path, class: "btn btn-primary" %>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <p class="text-red-500 mt-4">This is a private event. You must be invited to attend.</p>
+  <% end %>
 
   <% if user_signed_in? && current_user == @event.user %>
     <div class="flex space-x-4 mt-6">
       <h3 class="text-xl font-semibold">Event Admin</h3>
       <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-accent" %>
       <%= link_to "Delete Event", event_path(@event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-error" %>
+      
+      <!-- Button to open the dialog -->
+      <button class="btn btn-primary" onclick="document.getElementById('invite-dialog').showModal()">Invite Users</button>
     </div>
+
+    <!-- HTML dialog -->
+    <dialog id="invite-dialog" class="p-4 rounded-lg modal">
+      <div class="modal-box">
+        <%= render 'invite_users', event: @event %>
+        
+        <!-- Button to close the dialog -->
+        <button class="btn btn-secondary" onclick="document.getElementById('invite-dialog').close()">Close</button>
+      </div>
+    </dialog>
   <% end %>
 </section>
